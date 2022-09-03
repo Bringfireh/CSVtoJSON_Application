@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,28 +19,46 @@ namespace CSVtoJSON_Application
             string apppath = realpath[0];
 
             //get the file name
-            string csvFileName = Path.Combine(apppath + "Data\\CSV", "input.csv");
+            string csvFileName = Path.Combine(apppath + "Data\\CSV", "input.xlsx");
 
-            //Read data into datatable;
+            ////Read data into datatable;
             DataTable csvFileReader = new DataTable();
-            WorkBook workbook = WorkBook.Load(csvFileName);
+            //WorkBook workbook = WorkBook.Load(csvFileName);
 
-            WorkSheet sheet = workbook.DefaultWorkSheet;
+            //WorkSheet sheet = workbook.DefaultWorkSheet;
 
-             csvFileReader = sheet.ToDataTable(true);
+            // csvFileReader = sheet.ToDataTable(true);
+            OleDbConnection conn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + csvFileName + ";Extended Properties='Excel 12.0 Xml; HDR = YES; IMEX = 1'");
+            OleDbCommand cmd = new OleDbCommand("select * from [input$]", conn);
+            DataTable tbl = new DataTable();
+            
+            conn.Open();
+            tbl.Load(cmd.ExecuteReader());
+            conn.Close();
+            csvFileReader = tbl;
+
+            //Read all values into a List of csvfilefields
+            List<CSVFileFields> csvFileFields = new List<CSVFileFields>();
+            for(int i =0; i < csvFileReader.Rows.Count; i++)
+            {
+                csvFileFields.Add(new CSVFileFields { firstName = csvFileReader.Rows[i][0].ToString(), Surname = csvFileReader.Rows[i][1].ToString(), Username = csvFileReader.Rows[i][2].ToString(), Password=csvFileReader.Rows[i][3].ToString(), Roles = csvFileReader.Rows[i][4].ToString(), Groups = csvFileReader.Rows[i][5].ToString(), organisationUnits = csvFileReader.Rows[i][6].ToString(), OUCapture = csvFileReader.Rows[i][7].ToString() });
+            }
+
+            //Write the JSON Output file
+            string jsonFileName = Path.Combine(apppath + "Data\\JSON", "output.txt");
+            using (StreamWriter file = new StreamWriter(jsonFileName, append: true))
+            {
+                file.WriteLine("{");
+                foreach (var fields in csvFileFields)
+                {
+                    string id = Guid.NewGuid().ToString().Substring(0, 12);
+                    string idL = "\"id\"" + ":" + "\"" + id;
+                    file.WriteLine(idL);
+                    
+                }
+                file.WriteLine("}");
+            }
         }
-        //public DataTable ReadExcel(string fileName)
-        //{
-        //    WorkBook workbook = WorkBook.Load(fileName);
-            
-        //    WorkSheet sheet = workbook.DefaultWorkSheet;
-            
-        //    return sheet.ToDataTable(true);
-        //}
-        //public void ReadCSVData(string csvFileName)
-        //{
-        //    var csvFilereader = new DataTable();
-        //    csvFilereader = ReadExcel(csvFileName);
-        //}
+       
     }
 }
