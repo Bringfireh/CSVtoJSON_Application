@@ -46,15 +46,25 @@ namespace CSVtoJSON_Application
 
             //Write the JSON Output file
             string jsonFileName = Path.Combine(apppath + "Data\\JSON", "output.txt");
-            using (StreamWriter file = new StreamWriter(jsonFileName, append: true))
+            using (StreamWriter file = new StreamWriter(jsonFileName, append: false))
             {
                 file.WriteLine("{");
                 foreach (var fields in csvFileFields)
                 {
                     string id = Guid.NewGuid().ToString().Substring(0, 12);
-                    string idL = "\"id\"" + ":" + "\"" + id;
-                    file.WriteLine(idL);
-                    
+                    string idL = "\"id\"" + ":" + "\"" + id + "\"";
+                    string firstName = "\"firstName\"" + ":" + "\"" + fields.firstName + "\"";
+                    string surname = "\"surname\"" + ":" + "\"" + fields.Surname + "\"";
+                    string email = "\"email\"" + ":" + "\"" + fields.Email + "\"";
+                    string userCredentials = "\"userCredentials\"" + ":" + "" + "{" + "";
+
+
+                    file.WriteLine(idL + ",");
+                    file.WriteLine(firstName + ",");
+                    file.WriteLine(surname + ",");
+                    file.WriteLine(email + ",");
+                    file.WriteLine(userCredentials);
+                    file.WriteLine(" ");
                 }
                 file.WriteLine("}");
             }
