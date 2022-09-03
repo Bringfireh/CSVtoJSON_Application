@@ -48,15 +48,31 @@ namespace CSVtoJSON_Application
             string jsonFileName = Path.Combine(apppath + "Data\\JSON", "output.txt");
             using (StreamWriter file = new StreamWriter(jsonFileName, append: false))
             {
-                file.WriteLine("{");
+                //file.WriteLine("[");
+                int count = 0;
                 foreach (var fields in csvFileFields)
                 {
+                    count++;
+                    file.WriteLine("{");
                     string id = Guid.NewGuid().ToString().Substring(0, 12);
-                    string idL = "\"id\"" + ":" + "\"" + id + "\"";
-                    string firstName = "\"firstName\"" + ":" + "\"" + fields.firstName + "\"";
-                    string surname = "\"surname\"" + ":" + "\"" + fields.Surname + "\"";
-                    string email = "\"email\"" + ":" + "\"" + fields.Email + "\"";
-                    string userCredentials = "\"userCredentials\"" + ":" + "" + "{" + "";
+                    string idL ="  " + "\"id\"" + ":" + "\"" + id + "\"";
+                    string firstName ="  "+ "\"firstName\"" + ": " + "\"" + fields.firstName + "\"";
+                    string surname = "  " + "\"surname\"" + ": " + "\"" + fields.Surname + "\"";
+                    string email = "  " + "\"email\"" + ": " + "\"" + fields.Email + "\"";
+                    string userCredentials = "  " + "\"userCredentials\"" + ": " + "{" + "";
+                    string userInfo ="    " + "\"userInfo\"" + ": { " + "\"id\""+ ": "+ "\"" + id + "\" }";
+                    string username = "    " + "\"username\"" + ": " + "\"" + fields.Username + "\"";
+                    string password = "    " + "\"password\"" + ": " + "\"" + fields.Password + "\"";
+                    string userRolesS = "    " + "\"userRoles\"" + ": [ { " ;
+                    string userRolesM = "      " + "\"id\"" + ": " + "\"" + fields.Roles + "\"";
+                    string userRolesE = "    " + "} ]";
+                    string uCE = "  " + "}";
+                    string organisationUnitsS = "  " + "\"organisationUnits\"" + ": [ { ";
+                    string organisationUnitsM = "    " + "\"id\"" + ": " + "\"" + fields.organisationUnits + "\"";
+                    string organisationUnitsE = "  " + "} ]";
+                    string userGroupsS = "  " + "\"userGroups\"" + ": [ { ";
+                    string userGroupsM = "    " + "\"id\"" + ": " + "\"" + fields.Groups + "\"";
+                    string userGroupsE = "  " + "} ]";
 
 
                     file.WriteLine(idL + ",");
@@ -64,9 +80,25 @@ namespace CSVtoJSON_Application
                     file.WriteLine(surname + ",");
                     file.WriteLine(email + ",");
                     file.WriteLine(userCredentials);
+                    file.WriteLine(userInfo + ",");
+                    file.WriteLine(username + ",");
+                    file.WriteLine(password + ",");
+                    file.WriteLine(userRolesS);
+                    file.WriteLine(userRolesM);
+                    file.WriteLine(userRolesE);
+                    file.WriteLine(uCE + ",");
+                    file.WriteLine(organisationUnitsS);
+                    file.WriteLine(organisationUnitsM);
+                    file.WriteLine(organisationUnitsE + ",");
+                    file.WriteLine(userGroupsS);
+                    file.WriteLine(userGroupsM);
+                    file.WriteLine(userGroupsE);
+
+                    string d = (csvFileFields.Count() == count) ? "" : ",";
+                    file.WriteLine("}" + d);
                     file.WriteLine(" ");
                 }
-                file.WriteLine("}");
+                //file.WriteLine("]");
             }
         }
        

@@ -1,20 +1,63 @@
 {
-"id":"2746357e-d6c",
-"firstName":"Team",
-"surname":"ab Isiala Ngwa North General Hospital Team 1",
-"email":"email@email.com",
-"userCredentials":"{"
+  "id":"46d52ff8-3cd",
+  "firstName": "Team",
+  "surname": "ab Isiala Ngwa North General Hospital Team 1",
+  "email": "",
+  "userCredentials": {
+    "userInfo": { "id": "46d52ff8-3cd" },
+    "username": "abIsialaL2NNGHT1",
+    "password": "IsialaL223@",
+    "userRoles": [ { 
+      "id": "sFw7G2QsuBT"
+    } ]
+  },
+  "organisationUnits": [ { 
+    "id": "ab Isiala Ngwa North General Hospital Team 1"
+  } ],
+  "userGroups": [ { 
+    "id": "zIIibtgRg5R"
+  } ]
+},
  
-"id":"290bfdc2-de8",
-"firstName":"Team",
-"surname":"ab Isiala-Ngwa North Cottage Hospital Team 1",
-"email":"email@email.com",
-"userCredentials":"{"
+{
+  "id":"9267cce8-3ad",
+  "firstName": "Team",
+  "surname": "ab Isiala-Ngwa North Cottage Hospital Team 1",
+  "email": "",
+  "userCredentials": {
+    "userInfo": { "id": "9267cce8-3ad" },
+    "username": "abIsialaNgwaG7NCHT1",
+    "password": "IsialaNgwaG723@",
+    "userRoles": [ { 
+      "id": "sFw7G2QsuBT"
+    } ]
+  },
+  "organisationUnits": [ { 
+    "id": "ab Isiala-Ngwa North Cottage Hospital Team 1"
+  } ],
+  "userGroups": [ { 
+    "id": "zIIibtgRg5R"
+  } ]
+},
  
-"id":"640a852a-81a",
-"firstName":"Team",
-"surname":"ab Isiegbu Primary Health Centre Team 1",
-"email":"email@email.com",
-"userCredentials":"{"
- 
+{
+  "id":"7984b226-6cb",
+  "firstName": "Team",
+  "surname": "ab Isiegbu Primary Health Centre Team 1",
+  "email": "",
+  "userCredentials": {
+    "userInfo": { "id": "7984b226-6cb" },
+    "username": "abIsiegbuz5PHCT1",
+    "password": "Isiegbuz523@",
+    "userRoles": [ { 
+      "id": "sFw7G2QsuBT"
+    } ]
+  },
+  "organisationUnits": [ { 
+    "id": "ab Isiegbu Primary Health Centre Team 1"
+  } ],
+  "userGroups": [ { 
+    "id": "zIIibtgRg5R"
+  } ]
 }
+ 
